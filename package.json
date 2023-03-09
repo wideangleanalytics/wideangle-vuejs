@@ -1,0 +1,20 @@
+{
+  "name": "wideangle-vuejs",
+  "version": "0.0.1",
+  "description": "Wide Angle Analytics web analytics Plugin for Vue.js 3.x",
+  "homepage": "https://wideangle.co",
+  "repository": "github:inputobjects/wideangle-vuejs",
+  "main": "index.js",
+  "scripts": {
+  },
+  "keywords": [
+    "wide angle analytics",
+    "web analytics",
+    "vue.js",
+    "vuejs",
+    "plugin",
+    "vuejs plugin"
+  ],
+  "author": "Wide Angle Analytics <developers@wideangle.co>",
+  "license": "Apache-2.0"
+}
