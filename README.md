@@ -70,7 +70,7 @@ import { inject } from 'vue'
 const waa = inject('waa');
 ```
 
-You will find a fully functional example in this [repositry](sample/vue-sample).
+You will find a fully functional example in this [repository](sample/vue-sample).
 
 
 ## Tracking Pageviews
@@ -97,7 +97,7 @@ Currently **Click Events** are [emitted automatically](https://wideangle.co/docu
 
 Depending on the configured mode, the **Download Event** will fire automatically when either:
 * a file with recognized extension is being downloaded, or
-* when a link is marked with `data-waa-nama` attribute.
+* when a link is marked with `data-waa-name` attribute.
 
 | :warning:  Currently the tracker script does not listen to events inside shadow DOM. This is know limitation to be addressed in near term. |
 |--------------------------------------------------------------------------------------------------------------------------------------------|
