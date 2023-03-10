@@ -1,5 +1,4 @@
-| :exclamation:  This plugin in pre-release stage |
-|-------------------------------------------------|
+![full_logo_color_light_transparent](https://user-images.githubusercontent.com/4896588/224442362-45dd92e7-e118-46ac-a423-83d479a9654b.png)
 
 
 # Wide Angle Analytics for Vue.js
