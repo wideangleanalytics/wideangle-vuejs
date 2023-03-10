@@ -89,7 +89,7 @@ Site has to have these event enable in Wide Angle Analytics configuration prior 
 
 Currently **Click Events** are [emitted automatically](https://wideangle.co/documentation/tracking-click-events) based on element data attributes. 
 
-| :warning:  The tracker script does not listen to events inside shadow DOM. This is know limitation to be addressed in near term. |
+| :warning:  The tracker script does not listen to events inside shadow DOM. This is known limitation to be addressed in near term. |
 |--------------------------------------------------------------------------------------------------------------------------------------------|
 
 ### Tracking Downloads
@@ -98,7 +98,7 @@ Depending on the configured mode, the **Download Event** will fire automatically
 * a file with recognized extension is being downloaded, or
 * when a link is marked with `data-waa-name` attribute.
 
-| :warning:  Currently the tracker script does not listen to events inside shadow DOM. This is know limitation to be addressed in near term. |
+| :warning:  Currently the tracker script does not listen to events inside shadow DOM. This is known limitation to be addressed in near term. |
 |--------------------------------------------------------------------------------------------------------------------------------------------|
 
 ### Tracking Custom Actions
