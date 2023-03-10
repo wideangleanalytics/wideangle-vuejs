@@ -29,16 +29,99 @@ app.use(WideAnglePlugin)
 
 # Configuring Wide Angle Analytics plugin
 
-:construction_worker:  * TODO*
+The Wide Angle Analytics plugin must be initialized with configuration object as there are required settings without defaults.
+
+
+option|description|required|default|example
+------|-----------|--------|-------|-------
+siteId| The Site ID from Wide Angle Site settings| :white_check_mark: | _none_ | 8D27G3B9ACA01F4241
+domain| Domain hosting the script, can be found in Wide Angle Analytics Site settings | :white_check_mark: | _none_ | stats.wideangle.co
+fingerprint | Should script use browser fingerprinting; this might require collecting consent depeing on the applicable laws | false | true
+supressDnt | Should script ingore Do Not Track browser setting. If not enabled, not events will be sent if user's browser has DNT enabled | false | true
+includeParams | An array of query parameters that can be passed as part of tracking event. By default only `utm_*` and `ref` parameters are passed in the event| `[]` | `['sessionId', 'offset']`
+excludePaths | An array of URL paths that should not trigger default events such as page view, page leave | `[]` | `['^/wp-admin/.*', ]`
+ignoreHash | If enabled, change in the URL fragment will not trigger page view event | false | true
+
+You will find more details about these settings in [Wide Angle Analytics documentation](https://wideangle.co/documentation/configure-site).
+
+
+Example:
+
+```javascript 
+import WideAngle from 'wideangle-vue'
+
+const app = createApp(App);
+
+app.use(WideAngle, {
+  siteId: "8D27G3B9ACA01F4241",
+  domain: "stats.example.com",
+  fingerprint: true,
+  supressDnt: true
+});
+```
+
 
 # Usage 
 
+The Wide Angle Analytics provides an instance of `waa` which can be then injected to your component. 
+
+```javascript
+import { inject } from 'vue'
+const waa = inject('waa');
+```
+
+You will find a fully functional example in this [repositry](sample/vue-sample).
+
+
 ## Tracking Pageviews
+
+No action necessary. The tracker script automatically issues **Page View** and **Page Leave** events.
 
 ## Tracking Events 
 
+Wide Angle supports three specialized events:
+* clicks
+* downloads 
+* custom actions
+
+Site has to have these event enable in Wide Angle Analytics configuration prior to usage. Otherwise the tracker script will not sent these events. Consult [official documentation](https://wideangle.co/documentation/tracking-custom-actions) regarding how to enable event handling. 
+
 ### Tracking Clicks 
+
+Currently **Click Events** are [emitted automatically](https://wideangle.co/documentation/tracking-click-events) based on element data attributes. 
+
+| :warning:  The tracker script does not listen to events inside shadow DOM. This is know limitation to be addressed in near term. |
+|--------------------------------------------------------------------------------------------------------------------------------------------|
 
 ### Tracking Downloads
 
+Depending on the configured mode, the **Download Event** will fire automatically when either:
+* a file with recognized extension is being downloaded, or
+* when a link is marked with `data-waa-nama` attribute.
+
+| :warning:  Currently the tracker script does not listen to events inside shadow DOM. This is know limitation to be addressed in near term. |
+|--------------------------------------------------------------------------------------------------------------------------------------------|
+
 ### Tracking Custom Actions
+
+Custom action are the most flexible and can be triggered directly from Vue components. As such their usage is not limitted due to Shadow DOM.
+
+Example:
+
+```vue
+<template>
+  <button @click="sendEvent()">Send Event</button>    
+</template>
+
+<script setup>
+import { inject } from 'vue'
+const waa = inject('waa');
+const sendEvent = async () => {
+  const params = {
+    session: 'cjhw92nf9aq',
+    cohort: 'c1233'
+  }  
+  waa.dispatchEvent('interest', params);  
+}
+</script>
+```

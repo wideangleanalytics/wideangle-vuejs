@@ -1,3 +1,3 @@
-import WideAngle from './wideangle.js';
+import { initWideAngle } from './wideangle.js';
 
-export default WideAngle;
+export { initWideAngle };
