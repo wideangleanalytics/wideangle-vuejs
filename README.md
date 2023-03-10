@@ -36,11 +36,11 @@ option|description|required|default|example
 ------|-----------|--------|-------|-------
 siteId| The Site ID from Wide Angle Site settings| :white_check_mark: | _none_ | 8D27G3B9ACA01F4241
 domain| Domain hosting the script, can be found in Wide Angle Analytics Site settings | :white_check_mark: | _none_ | stats.wideangle.co
-fingerprint | Should script use browser fingerprinting; this might require collecting consent depeing on the applicable laws | false | true
-supressDnt | Should script ingore Do Not Track browser setting. If not enabled, not events will be sent if user's browser has DNT enabled | false | true
-includeParams | An array of query parameters that can be passed as part of tracking event. By default only `utm_*` and `ref` parameters are passed in the event| `[]` | `['sessionId', 'offset']`
-excludePaths | An array of URL paths that should not trigger default events such as page view, page leave | `[]` | `['^/wp-admin/.*', ]`
-ignoreHash | If enabled, change in the URL fragment will not trigger page view event | false | true
+fingerprint | Should script use browser fingerprinting; this might require collecting consent depeing on the applicable laws | :x: | false | true
+supressDnt | Should script ingore Do Not Track browser setting. If not enabled, not events will be sent if user's browser has DNT enabled | :x: | false | true
+includeParams | An array of query parameters that can be passed as part of tracking event. By default only `utm_*` and `ref` parameters are passed in the event | :x: | `[]` | `['sessionId', 'offset']`
+excludePaths | An array of URL paths that should not trigger default events such as page view, page leave | :x: | `[]` | `['^/wp-admin/.*', ]`
+ignoreHash | If enabled, change in the URL fragment will not trigger page view event | :x: | false | true
 
 You will find more details about these settings in [Wide Angle Analytics documentation](https://wideangle.co/documentation/configure-site).
 
