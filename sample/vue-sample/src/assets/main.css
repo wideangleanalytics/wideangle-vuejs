@@ -1,3 +1,13 @@
 body {
+  background-color: azure;
+  margin: 2rem;
   font-size: 1.5rem;
+  font-weight: 800;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+button {
+  border-width: 4px;
+  border-style: solid;
+  border-color: lightpink;
 }
