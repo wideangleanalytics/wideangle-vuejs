@@ -6,6 +6,10 @@
   "repository": "github:inputobjects/wideangle-vuejs",
   "main": "index.js",
   "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "clear": "rimraf dist",
+    "rebuild": "npm run clear && npm run build",
+    "prepublishOnly": "npm run rebuild"
   },
   "keywords": [
     "wide angle analytics",
@@ -16,5 +20,8 @@
     "vuejs plugin"
   ],
   "author": "Wide Angle Analytics <developers@wideangle.co>",
-  "license": "Apache-2.0"
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "typescript": "^5.0.4"
+  }
 }

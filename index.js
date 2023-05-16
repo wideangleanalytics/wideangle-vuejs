@@ -1,12 +1,12 @@
-import { initWideAngle } from "./src";
+import { initWideAngle } from "./dist";
 import { ref } from 'vue';
 
 export default {
   install: async (app, options) => {
     const waaRef = ref()
-    app.provide('waa', waaRef);         
+    app.provide('waa', waaRef);
     initWideAngle(options)
-      .then(waa => { 
+      .then(waa => {
         waaRef.value = waa;
         console.debug("[WAA] Wide Angle Analytics instance available");
       })
