@@ -5,7 +5,7 @@
 [![Downloads][npm-downloads-src]][npm-downloads-href]
 [![Wide Angle][wideangle-src]][wideangle-href]
 
-![full_logo_color_light_transparent](https://user-images.githubusercontent.com/4896588/224442362-45dd92e7-e118-46ac-a423-83d479a9654b.png)
+![wide-angle-analytics-logo.png](assets/full_logo_color_light_transparent.png)
 
 Enable **privacy-friendly** web analytics in your Vue.js 3.x application with our official plugin.
 
@@ -40,10 +40,11 @@ option|description|required|default|example
 siteId| The Site ID from Wide Angle Site settings| :white_check_mark: | _none_ | 8D27G3B9ACA01F4241
 domain| Domain hosting the script, can be found in Wide Angle Analytics Site settings | :white_check_mark: | _none_ | stats.wideangle.co
 fingerprint | Should script use browser fingerprinting; this might require collecting consent depeing on the applicable laws | :x: | false | true
-supressDnt | Should script ingore Do Not Track browser setting. If not enabled, not events will be sent if user's browser has DNT enabled | :x: | false | true
+suppressDnt | Should script ingore Do Not Track browser setting. If not enabled, not events will be sent if user's browser has DNT enabled | :x: | false | true
 includeParams | An array of query parameters that can be passed as part of tracking event. By default only `utm_*` and `ref` parameters are passed in the event | :x: | `[]` | `['sessionId', 'offset']`
 excludePaths | An array of URL paths that should not trigger default events such as page view, page leave | :x: | `[]` | `['^/wp-admin/.*', ]`
 ignoreHash | If enabled, change in the URL fragment will not trigger page view event | :x: | false | true
+consentMarker | Cookie (with or without) value which present implies consent and absence lack its lack | :x: | n/a | `WAA_CONSENT=true`
 
 You will find more details about these settings in [Wide Angle Analytics documentation](https://wideangle.co/documentation/configure-site).
 
@@ -59,7 +60,7 @@ app.use(WideAngle, {
   siteId: "8D27G3B9ACA01F4241",
   domain: "stats.example.com",
   fingerprint: true,
-  supressDnt: true
+  suppressDnt: true
 });
 ```
 
@@ -120,6 +121,59 @@ const sendEvent = async () => {
   }  
   waa.value.dispatchEvent('interest', params);  
 }
+</script>
+```
+
+# Consent Handling
+
+By default, Wide Angle Analytics does nore require consent thanks to its privacy-first, anonymous tracking and principaled approached to compliance. 
+
+However, you have additional toggles should you wish to control consent, either in **Opt-In** or **Opt-Out** mode. 
+
+## Opt-Out by default
+
+If the visitors browsers has `DoNotTrack` setting enabled in the browser, it will be understood as opt-out and not tracking events will be issued.
+
+You website can't overwrite this behaviour by specifying `suppressDnt` setting.
+
+```javascript
+app.use(WideAngle, {
+  siteId: "8D27G3B9ACA01F4241",
+  suppressDnt: true
+});
+```
+
+## Opt-In or Opt-Out based on Cookie
+
+Wide Angle can be configure to handle presence of a cookie, or a cookie with specific value, as an implicit consent. Lack of the cookie will be handled as implicit opt-out.
+
+Example configuration with cookie marker, expecting cookie name `WAA_CONSENT` with value `true`:
+
+```javascript
+app.use(WideAngle, {
+  siteId: "8D27G3B9ACA01F4241",
+  consentMarker: "WAA_CONSENT=true"
+});
+```
+
+
+## Programmatic consent
+
+The Wide Angle serving offers two additional methods, which allow for recording tracking consent:
+
+- `recordConsent(subjectId: String): void`, and
+- `revokeConsent()`
+
+
+Calling above methods on `waa` service will overwrite other consent mechanism (ie. DoNotTrack, and cookie marker).
+
+Example usage:
+
+```vue
+<script setup>
+import { inject } from 'vue'
+const waa = inject('waa');
+waa.value.recordConsent('FHJ44111');
 </script>
 ```
 

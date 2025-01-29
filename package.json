@@ -1,9 +1,12 @@
 {
   "name": "wideangle-vuejs",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "description": "Wide Angle Analytics web analytics Plugin for Vue.js 3.x",
   "homepage": "https://wideangle.co",
-  "repository": "github:wideangleanalytics/wideangle-vuejs",
+  "repository": {
+    "type": "git",
+    "url": "https://cloud.inputobjects.eu/forge/wideangle/wideangle-vuejs.git"
+  },
   "main": "index.js",
   "scripts": {
     "build": "tsc -p tsconfig.json",
